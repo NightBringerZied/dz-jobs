@@ -1,13 +1,107 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  line-height: 1.15;
+  background-color: var(--background-site);
+  font-size: 62.5%;
+  font-family: Inter, 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  font-size: 1.6rem;
+  line-height: 1.65;
+}
 .embla {
+  width:100%;
+  height:100%;
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+}
+.embla__viewport {
   overflow: hidden;
 }
 .embla__container {
   display: flex;
+  width:100%;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1);
 }
 .embla__slide {
-  flex: 0 0 100%;
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
   min-width: 0;
+  width:100%;
+  padding-left: var(--slide-spacing);
+}
+.embla__slide__number {
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  border-radius: 1.8rem;
+  font-size: 4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  height:50vh;
+  user-select: none;
+}
+.embla__controls {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1.8rem;
+}
+.embla__dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: calc((2.6rem - 1.4rem) / 2 * -1);
+}
+.embla__dot {
+  -webkit-tap-highlight-color: green;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.embla__dot:after {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background-color:#4CAF4F;
+  opacity:30%;
+  display: flex;
+  align-items: center;
+  content: '';
+}
+.embla__dot--selected:after {
+  background-color:#4CAF4F;
+  opacity:100%;
 }

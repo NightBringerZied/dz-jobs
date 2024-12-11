@@ -19,8 +19,8 @@ const Nav = () => {
   let currentPath = usePathname();
   return (
         <div
-                  className={`w-screen box-border min-w-0 md:h-[85px] absolute top-0 z-[10] 
-                    ${currentPath === "/" ? "absolute top-0 z-[10]" : "bg-white text-black"}  
+                  className={`w-screen box-border min-w-0 md:h-[85px] absolute top-0 z-[10]  bg-[#f6f7fb]
+                    ${currentPath === "/" ? "absolute top-0 z-[10]" : " text-black"}  
                     ${isOpen ? "max-md:flex-col max-md:justify-around max-md:w-full max-md:h-[100%] max-md:items-center" : "max-md:h-[60px]"} 
                     flex flex-row justify-between items-center pl-[2vw] pr-[2vw]`}
                 >
@@ -58,10 +58,10 @@ const Nav = () => {
                     className={`flex justify-center items-center gap-5 
                       ${!isOpen ? "max-md:hidden" : "max-md:w-full max-md:p-4 max-md:justify-around"}`}
                   >
-                    <button className="py-3 px-5 bg-white text-[#4CAF4F] rounded-lg hover:bg-[#4CAF4F] hover:text-white">
+                    <button className="py-3 px-5 bg-[#f6f7fb] text-[#4CAF4F] rounded-lg hover:bg-[#4CAF4F] hover:text-white">
                       <Link href="/Login">Login</Link>
                     </button>
-                    <button className="py-3 px-5 bg-white text-[#4CAF4F] rounded-lg hover:bg-[#4CAF4F] hover:text-white">
+                    <button className="py-3 px-5 bg-[#f6f7fb] text-[#4CAF4F] rounded-lg hover:bg-[#4CAF4F] hover:text-white">
                       <Link href="/SignUp">Sign Up</Link>
                     </button>
                   </div>
