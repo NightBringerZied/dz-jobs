@@ -26,7 +26,7 @@ const EmblaCarousel = (props) => {
   )
 
   return (
-    <section className="embla h-[8vh] bg-[#f6f7fb]">
+    <section className="embla bg-[#f6f7fb]">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
             <div className="embla__slide">
