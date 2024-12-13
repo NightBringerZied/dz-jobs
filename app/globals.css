@@ -78,21 +78,22 @@ body {
   background-color: transparent;
   touch-action: manipulation;
   display: inline-flex;
+  gap:2px;
   text-decoration: none;
   cursor: pointer;
   border: 0;
   padding: 0;
   margin: 0;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
 }
 .embla__dot:after {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
   background-color:#4CAF4F;
   opacity:30%;
@@ -103,4 +104,40 @@ body {
 .embla__dot--selected:after {
   background-color:#4CAF4F;
   opacity:100%;
+}
+
+.embla_client {
+  width:100%;
+  --slide-size: 13%;
+}
+.embla__viewport_client {
+  overflow: hidden;
+}
+.embla__container_client {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y pinch-zoom;
+  margin-left: 10px;
+}
+.embla__slide_client {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+}
+@media not all and (min-width: 768px) {
+  .embla__slide_client {
+    transform: translate3d(0, 0, 0);
+    flex: 0 0 25%;
+  }
+}
+.embla__slide__number_client {
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  border-radius: 1.8rem;
+  font-size: 4rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--slide-height);
+  user-select: none;
 }

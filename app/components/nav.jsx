@@ -7,13 +7,7 @@ import CustomLink from "./CustomLink.jsx";
 import Image from "next/image.js";
 import LOGO from "../../public/logo.png"
 import { EmblaCarousel } from "./EmblaCarousel.jsx";
-const targets = [
-  { target: "/marketplace", title: "Nos modèle" },
-  { target: "/event", title: "Nos évènements" },
-  { target: "/services", title: "Services" },
-  { target: "/FAQ", title: "FAQ" },
-  { target: "/about", title: "About Us" },
-];
+
 const Nav = () => {
   let [isOpen, setIsOpen] = useState(false);
   let currentPath = usePathname();
