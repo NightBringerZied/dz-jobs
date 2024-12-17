@@ -5,7 +5,7 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import client from "../../../public/Vector.png";
-import icon from "../../../public/icon.png";
+import icon from "../../../public/Icon.png";
 
 const Clients = ({ options }) => {
   const [emblaRef] = useEmblaCarousel(options, [Autoplay()]);
