@@ -6,7 +6,7 @@ import { FiMenu } from "react-icons/fi";
 import CustomLink from "./CustomLink.jsx";
 import Image from "next/image.js";
 import LOGO from "../../public/logo.png"
-import { EmblaCarousel } from "./EmblaCarousel.jsx";
+import { EmblaCarousel } from "./landingpage/EmblaCarousel.jsx";
 
 const Nav = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -15,7 +15,7 @@ const Nav = () => {
         <div
                   className={`w-screen box-border min-w-0 md:h-[85px] absolute top-0 z-[10]  bg-[#f6f7fb]
                     ${currentPath === "/" ? "absolute top-0 z-[10]" : " text-black"}  
-                    ${isOpen ? "max-md:flex-col max-md:justify-around max-md:w-full max-md:h-[100%] max-md:items-center" : "max-md:h-[60px]"} 
+                    ${isOpen ? "max-md:fixed max-md:overflow-hidden max-md:flex-col max-md:justify-around max-md:w-full max-md:h-[100%] max-md:items-center" : "max-md:h-[60px]"} 
                     flex flex-row justify-between items-center pl-[2vw] pr-[2vw]`}
                 >
                   {/* Logo and Menu Icon Section */}

@@ -18,11 +18,27 @@ const EmblaCarousel = ({ options }) => {
     emblaApi,
     onNavButtonClick
   );
+ const arr=[{
+    id:1,
+    title:"The ultimate platform for IT",
+    subtitle:"careers and recruitment",
+    link:"Register",
+  },{
+    id:2,
+    title:"Tools to build professional",
+    subtitle:"profiles, search for jobs, and track applications.",
+    link:"Find a Job",
+  },{
+    id:3,
+    title:"A robust system to manage",
+    subtitle:" job postings, review applications, and communicate with potential hires.",
+    link:"Post a Job",
+  }]
 
-  const slides = Array(3).fill(0).map((_, index) => (
+  const slides = arr.map((_, index) => (
     <div key={index} className="embla__slide">
       <div className="embla__slide__number">
-        <Slide1 />
+        <Slide1 title={arr[index].title} subtitle={arr[index].subtitle} link={arr[index].link} />
       </div>
     </div>
   ));
