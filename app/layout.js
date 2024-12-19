@@ -15,10 +15,8 @@ export default function RootLayout({ children }) {
           <body
             className={` antialiased  `}
           > 
-           <Layout>
               <Nav /> 
               {children}
-              </Layout>
           </body>
       
       </html>

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 const Slide2 = () => {
   return (
-    <div className='flex flex-row justify-center max-md:items-center w-[90%] h-full  ml-10 py-20'>
+    <div className='flex flex-row justify-center max-md:items-center w-full h-full  ml-10 py-20'  id='aboutus' >
             <div className='flex flex-col w-[50%] h-[90%] justify-center items-center max-md:hidden'>
                 <img src="/rafiki.png" alt="gg" className='h-[350px] w-[300px]' />
             </div>

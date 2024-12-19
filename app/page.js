@@ -4,6 +4,7 @@ import Slide2 from "./components/landingpage/Slide2";
 import Stats from "./components/landingpage/Stats";
 import Slide3 from "./components/landingpage/Slide3";
 import Last from "./components/landingpage/Last";
+import ContactUs from "./components/landingpage/ContactUs";
 export default function Home() {
 const OPTIONS = { loop: true }
   return (
@@ -13,7 +14,9 @@ const OPTIONS = { loop: true }
       <Slide2/>
       <Stats/>
       <Slide3/>
+      <ContactUs/>
       <Last/>
+      
     </div>
 
   );

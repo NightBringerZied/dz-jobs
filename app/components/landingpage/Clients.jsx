@@ -18,7 +18,7 @@ const Clients = ({ options }) => {
   ));
 
   return (
-    <div className="w-full flex flex-col justify-center gap-8 items-center pb-4">
+    <div className="w-full flex flex-col justify-center gap-8 items-center pb-4" id="feature">
       <h1 className="text-[#4D4D4D] text-6xl max-md:text-4xl ">Our Clients</h1>
       <h5 className="text-[#717171] text-4xl max-md:text-xl">Trusted by leading IT companies in Algeria</h5>
       <section className="embla_client py-10 ">

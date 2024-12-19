@@ -40,11 +40,10 @@ const Nav = () => {
                       ${isOpen ? "max-md:w-full max-md:gap-8 max-md:p-2 max-md:mt-20" : "max-md:hidden"}`}
                   >
                     <CustomLink href="/" title="Home" currentPath={currentPath} />
-                    <CustomLink href="/Service" title="Service" currentPath={currentPath} />
-                    <CustomLink href="/Feature" title="Feature" currentPath={currentPath} />
-                    <CustomLink href="/Product" title="Product" currentPath={currentPath} />
-                    <CustomLink href="/Testimonial" title="Testimonial" currentPath={currentPath} />
-                    <CustomLink href="/FAQ" title="FAQ" currentPath={currentPath} />
+                    <CustomLink href="#feature" title="Feature" currentPath={currentPath} />
+                    <CustomLink href="#aboutus" title="About Us" currentPath={currentPath} />
+                    <CustomLink href="#candidate" title="candidate" currentPath={currentPath} />
+                    <CustomLink href="#contactus" title="Contact Us" currentPath={currentPath} />
                   </ul>
 
                   {/* Buttons Section */}

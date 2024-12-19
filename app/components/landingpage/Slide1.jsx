@@ -4,7 +4,7 @@ import Image from 'next/image'
 import slide from '../../../public/slide1.png'
 const Slide1 = (props) => {
   return (
-    <div className='flex flex-row justify-around w-[90%] h-full  bg-[#f6f7fb]'>
+    <div className='flex flex-row justify-around w-[90%] h-full  bg-[#f6f7fb]' >
             <div className='flex flex-col w-full max-md:w-full h-full  justify-center items-center'>
                     <div className='flex flex-col justify-between items-start'>
                             <h2 className='max-lg:text-5xl xl:text-6xl max-sm:text-4xl'>
