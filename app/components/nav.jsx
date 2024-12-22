@@ -52,10 +52,10 @@ const Nav = () => {
                       ${!isOpen ? "max-md:hidden" : "max-md:w-full max-md:p-4 max-md:justify-around"}`}
                   >
                     <button className="py-3 px-5 bg-[#f6f7fb] text-[#4CAF4F] rounded-lg hover:bg-[#4CAF4F] hover:text-white">
-                      <Link href="/Login">Login</Link>
+                      <Link href="/auth/signin">Sign In</Link>
                     </button>
                     <button className="py-3 px-5 bg-[#f6f7fb] text-[#4CAF4F] rounded-lg hover:bg-[#4CAF4F] hover:text-white">
-                      <Link href="/SignUp">Sign Up</Link>
+                      <Link href="/auth/signup">Sign Up</Link>
                     </button>
                   </div>
                 </div>

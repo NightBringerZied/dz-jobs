@@ -1,7 +1,6 @@
 import localFont from "next/font/local";
 import Nav from "./components/nav";
 import "./globals.css";
-import Layout from "./components/layout";
 export const metadata = {
   title: "Dz Jobs",
   description: "Your website to get a job",
@@ -15,7 +14,6 @@ export default function RootLayout({ children }) {
           <body
             className={` antialiased  `}
           > 
-              <Nav /> 
               {children}
           </body>
       
