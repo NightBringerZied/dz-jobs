@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Profile = () => {
+  
   return (
     <div className="w-full max-md:flex-col flex flex-row min-h-[180px] bg-white rounded-lg justify-between items-center shadow-2xl">
       <div className='flex max-sm:flex-col  flex-row h-full min-h-[180px] items-center justify-center max-md:w-[90%] w-[80%] gap-10'>

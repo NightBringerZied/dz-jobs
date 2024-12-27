@@ -37,20 +37,20 @@ export const AuthProvider = ({ children }) => {
       if (!res.ok) { 
         console.log(res.json())
         throw new Error('Sign-up failed');
-       
       }
 
       const data = await res.json();
       console.log(data.data);
       setUser(data); // Automatically log in the user
       if(data.data.role === 'candidate'){
-             router.push('/candidates');}else{
-             router.push('/recruters');
+             router.push('/candidates/profile');}else{
+             router.push('/recruters/profile');
       }
     } catch (err) {
       console.log(err.message);
     }
   };
+  
 
 
   const logout = () => setUser(null); // Reset user state
@@ -61,5 +61,4 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 export const useAuth = () => useContext(AuthContext);

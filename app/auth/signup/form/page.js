@@ -15,7 +15,8 @@ const page = () => {
   const formRef = useRef(null);
   const [role, setRole] = useState('');
  
-    useEffect(() => {
+      useEffect(() => {
+      // Parse the query string manually
       const params = new URLSearchParams(window.location.search);
       const roleFromUrl = params.get('role');
       setRole(roleFromUrl || '');

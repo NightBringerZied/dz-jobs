@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import { useAuth } from "@/app/context/AuthContext";
 import { signinAction } from "@/app/action/UserAction";
 const Page = () => {
   const [hasText, setHasText] = useState(false);
@@ -10,6 +9,10 @@ const Page = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef(null);
+
+
+
+  
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const handleInputChange = (e) => setHasText(e.target.value !== "");
   const handlepassChange = (e) => setpass(e.target.value !== "");
