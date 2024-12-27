@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import axios from "axios";
-
+import { useAuth } from "@/app/context/AuthContext";
+import { signinAction } from "@/app/action/UserAction";
 const Page = () => {
   const [hasText, setHasText] = useState(false);
   const [pass, setpass] = useState(false);
@@ -10,7 +10,6 @@ const Page = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef(null);
-
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const handleInputChange = (e) => setHasText(e.target.value !== "");
   const handlepassChange = (e) => setpass(e.target.value !== "");
@@ -20,13 +19,14 @@ const Page = () => {
     setError("");
     const email = e.target.email.value;
     const password = e.target.password.value;
-    try {
-      const res = await axios.post("dz-jobs-api-production.up.railway.app/v1/auth/login", {email, password});
-      console.log(res.data)
-      return res;
-    } finally{
+    const data={email,password}
+    try{
+      await signinAction(data);
+    }
+    finally{
       setIsLoading(false);
-    }}
+    }
+  };
   
 
   const handleButtonClick = () => {
@@ -99,19 +99,12 @@ const Page = () => {
         </div>
         <div className="w-[60%] flex flex-col h-[40%] justify-around items-center">
           <h1 className="text-3xl text-[#9D9D9D]">-OR-</h1>
-          <div className="flex flex-row w-full jutify-between items-center gap-5">
+          <div className="flex flex-row w-full jutify-center items-center gap-5">
             <Link
               href={"/"}
               className="w-[90%] border rounded-lg border-[#E5E5E5] p-4 flex flex-row justify-evenly items-center"
             >
               <img src="/google.png" alt="icon" />
-              <h5 className="text-lg">Sign In With Google</h5>
-            </Link>
-            <Link
-              href={"/"}
-              className="w-[90%] border rounded-lg border-[#E5E5E5] p-4 flex flex-row justify-evenly items-center"
-            >
-              <img src="/facebook2.png" alt="icon" />
               <h5 className="text-lg">Sign In With Google</h5>
             </Link>
           </div>

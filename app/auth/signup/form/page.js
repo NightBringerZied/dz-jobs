@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import { useState,useRef } from 'react'
+import { useAuth } from '@/app/context/AuthContext'
+import { useState,useRef,useEffect,Suspense } from 'react'
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link'
-import axios from 'axios'
-
 const page = () => {
   const [hasText, setHasText] = useState(false);
   const [pass, setpass] = useState(false);
@@ -11,21 +11,31 @@ const page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+  const {signup} = useAuth();
   const formRef = useRef(null);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const name = e.target.name.value;
-    const role = "candidate";
-   
-      const res = axios.post(`https://dz-jobs-api-production.up.railway.app/v1/auth/register`, {email,name,password,role});
-      console.log(res.data)
-      return res;
-      }
+  const [role, setRole] = useState('');
+ 
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const roleFromUrl = params.get('role');
+      setRole(roleFromUrl || '');
+    }, []); 
+
+    const handleSubmit = async (e) => {
+     e.preventDefault();
+        setIsLoading(true);
+        setError("");
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const name = e.target.name.value;
+          try{
+            await signup({email,password,name,role});
+          }
+          finally{
+            setIsLoading(false);
+          }
+        };
+    
   const togglePasswordVisibility = () => {setShowPassword((prev) => !prev);};
   const handleInputChange = (e) => {setHasText(e.target.value !== "");};
   const handleNameChange = (e) => {setname(e.target.value !== ""); };
@@ -39,6 +49,7 @@ const page = () => {
 
 
   return (
+    <Suspense>
     <div className='bg-[#A5D6A7] w-full h-screen overflow-hidden flex flex-row justify-between items-center'>
             <div className='w-[40%] h-[90%]  flex flex-col justify-between items-start relative max-md:hidden'>
                 <div className='flex flex-col justify-around items-center w-[40%] gap-10'>
@@ -121,7 +132,7 @@ const page = () => {
               </div>
               <div className='w-[60%] flex flex-col h-[40%] justify-around items-center'>
                       <h1 className='text-3xl text-[#9D9D9D] '>-OR-</h1>
-                      <div className='flex flex-row w-full jutify-between items-center gap-5'>
+                      <div className='flex flex-row max-md:flex-col w-full jutify-between items-center gap-5'>
                               <Link href={"/"} className='w-[90%] border rounded-lg border-[#E5E5E5] p-4  flex flex-row justify-evenly items-center'>
                                     <img src='/google.png' alt='icon'/>
                                     <h5 className='text-lg'>Sign Up With Google</h5>
@@ -143,6 +154,7 @@ const page = () => {
               </div>
             </div>
     </div>
+    </Suspense>
   )
 }
 

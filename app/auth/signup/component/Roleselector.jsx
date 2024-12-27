@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-
 const Roleselector = () => {
   const [selectedRole, setSelectedRole] = useState(null); // Track the selected role
 
