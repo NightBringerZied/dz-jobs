@@ -1,7 +1,7 @@
 "use server"
-
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { parseCookies, setCookie, destroyCookie } from 'nookies';
 
 export async function signinAction(data) {
     
@@ -37,12 +37,12 @@ export async function signinAction(data) {
       } else if (key === 'refreshToken') {
         cookieOptions.maxAge = 60 * 60 * 24 * 30; 
       }
-
       cookiesStore.set(key, value, cookieOptions);
-      redirect('/candidates/profile');  
+      if(!data.first){
+        redirect("/candidates/profile");
+      }else{redirect("/setup")}
     });
   }
-
   try {
     const data = await res.json();
     console.log(data);
@@ -51,25 +51,61 @@ export async function signinAction(data) {
     throw new Error('Failed to parse the response.');
     
   }
-}
-
+};
 export async function signupAction(data) {
-
-  const credentials = {
-    email: data.email,
-    password: data.password,
-    name: data.name,
-    role:data.rolle
-  }
-
   const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/auth/register`, {
     method: "POST",
-    body: JSON.stringify(credentials),
+    body: JSON.stringify(data),
     headers: {
       "Content-Type": "application/json",
     },
   });
-  const setCookieHeader = res.headers.get("set-cookie");
+
+  let responseData;
+  try {
+    responseData = await res.json();
+  } catch (error) {
+    throw new Error('Failed to parse the response.');
+  }
+
+  if (res.ok) {
+    redirect('/auth/signin?firsttime=true');
+  } else {
+    console.log("error");
+  }
+  return responseData;
+}
+export async function sendOtpAction(data) {
+    const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/auth/send-reset-otp`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  let responseData;
+  try {
+    responseData = await res.json();
+  } catch (error) {
+    throw new Error('Failed to parse the response.');
+  }
+  if (res.ok) {
+    redirect('/auth/resetpassword/verifyotp?email='+data.email);
+  } else {
+    console.log("error");
+  }
+  return responseData;
+}
+export async function verifyOtpAction(data) {
+  const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/auth/verify-otp`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+    const setCookieHeader = res.headers.get("set-cookie");
   if (res.ok && setCookieHeader) {
     const cookiesArray = setCookieHeader.split(", ").map((cookie) => cookie.split(";")[0]);
     const cookiesStore = await cookies();
@@ -83,21 +119,46 @@ export async function signupAction(data) {
         sameSite: 'none',
       };
       console.log('key', key)
-      if (key === 'accessToken') {
+      if (key === 'resetToken') {
         cookieOptions.maxAge = 60 * 15; 
-      } else if (key === 'refreshToken') {
-        cookieOptions.maxAge = 60 * 60 * 24 * 30; 
       }
-
-      cookiesStore.set(key, value, cookieOptions);
-      redirect('/recruters/profile');  
-    });
-  }
+      cookiesStore.set(key, value, cookieOptions);})
+    }
+  let responseData;
   try {
-    const data = await res.json();
-    console.log(data);
-    return data;
+    responseData = await res.json();
   } catch (error) {
-    throw new Error('Failed to parse the response.'); 
+    throw new Error('Failed to parse the response.');
   }
+  if (res.ok) {
+    redirect('/auth/resetpassword/verifyotp/reset?email='+data.email);
+  } else {
+    console.log("error");
+  }
+  return responseData;
+}
+export async function resetPasswordAction(data) {
+  const token = await cookies().get("reset_token");
+  const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/auth/reset-password`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token.value}`,
+      "Cookie": `${token.name}=${token.value}`
+    },
+  });
+
+  let responseData;
+  try {
+    responseData = await res.json();
+  } catch (error) {
+    throw new Error('Failed to parse the response.');
+  }
+  if (res.ok) {
+    redirect('/auth/signin');
+  } else {
+    console.log("error");
+  }
+  return responseData;
 }

@@ -1,7 +1,12 @@
 import React from 'react'
-
+import { DialogDemo } from '@/app/candidates/component/DialogDemo'
 const Profile = () => {
-  
+  const personalData = [
+    { label: 'Name', value: 'John Doe' },
+    { label: 'Email', value: 'john.doe@example.com' },
+    { label: 'Phone', value: '+1 123 456 7890' },
+    // Add more data as needed
+  ];
   return (
     <div className="w-full max-md:flex-col flex flex-row min-h-[180px] bg-white rounded-lg justify-between items-center shadow-2xl">
       <div className='flex max-sm:flex-col  flex-row h-full min-h-[180px] items-center justify-center max-md:w-[90%] w-[80%] gap-10'>
@@ -17,9 +22,7 @@ const Profile = () => {
         </div>
       </div>
       <div className='flex w-[10%] max-md:w-full md:min-h-[200px] p-4 max-md:items-center md:items-end max-md:justify-end md:justify-center'>
-          <button className='h-full max-md:w-[20%] md:w-full items-end text-lg justify-end px-2 py-4  text-white rounded-xl bg-[#4D4D]'>
-              Edit Profile 
-          </button>
+          <DialogDemo name={"profile"} data={personalData}/>
       </div>
     </div>
   )

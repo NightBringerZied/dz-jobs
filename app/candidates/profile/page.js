@@ -9,32 +9,21 @@ import Skills from './component/skills/Skills'
 import Portfolio from './component/portfolio/Portfolio'
 import { cookies } from "next/headers";
 const page = async () => {
-  const token = await cookies().get('access_token');
-  console.log(token);
-  const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/candidates/default`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token.value}`,
-      "Cookie": `${token.name}=${token.value}`
-     },
-  });
-  console.log(token)
-  const res2 = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/candidates`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token.value}`,
-      "Cookie": `${token.name}=${token.value}`
-     },
-  });
-  try{
-    const data2=await res2.json()
-    console.log(data2.data);
-  }catch(err){
-    console.log(err);
-  }
-
+      const token = await cookies().get('access_token');
+      const res2 = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/candidates/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token.value}`,
+          "Cookie": `${token.name}=${token.value}`
+        },
+      });
+      try{
+        const data2=await res2.json()
+        console.log(data2.data);
+      }catch(err){
+        console.log(err);
+      }
 return (
     <div className='w-full flex flex-col justify-center items-center' >
         <div className="w-full flex flex-col justify-center items-center p-4 gap-10">

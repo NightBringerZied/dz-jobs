@@ -1,56 +1,48 @@
 "use client"
 import React from 'react'
-import { useAuth } from '@/app/context/AuthContext'
 import { useState,useRef,useEffect,Suspense } from 'react'
-import { useSearchParams } from 'next/navigation';
+import { signupAction } from '@/app/action/UserAction';
 import Link from 'next/link'
 const page = () => {
   const [hasText, setHasText] = useState(false);
   const [pass, setpass] = useState(false);
   const [name, setname] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const {signup} = useAuth();
   const formRef = useRef(null);
   const [role, setRole] = useState('');
- 
-      useEffect(() => {
-      // Parse the query string manually
-      const params = new URLSearchParams(window.location.search);
-      const roleFromUrl = params.get('role');
-      setRole(roleFromUrl || '');
-    }, []); 
-
-    const handleSubmit = async (e) => {
-     e.preventDefault();
-        setIsLoading(true);
-        setError("");
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const name = e.target.name.value;
-          try{
-            await signup({email,password,name,role});
-          }
-          finally{
-            setIsLoading(false);
-          }
-        };
-    
   const togglePasswordVisibility = () => {setShowPassword((prev) => !prev);};
   const handleInputChange = (e) => {setHasText(e.target.value !== "");};
   const handleNameChange = (e) => {setname(e.target.value !== ""); };
   const handlepassChange = (e) => {setpass(e.target.value !== "");};
-  const handleButtonClick = () => {
-    if (formRef.current) {
-      formRef.current.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
-    }
-  };
+  const handleButtonClick = () => {if (formRef.current) {formRef.current.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));} };
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const roleFromUrl = params.get('role');
+    setRole(roleFromUrl || '');
+  }, []); 
+    
+  const  handleSubmit = async (e) => {
+      console.log("i enter but idk")
+      e.preventDefault();
+      setIsLoading(true);
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      const name = e.target.name.value;
+      const role="candidate"
+      const data={email,password,name,role}
+          try{
+            const response = await signupAction(data);
+            console.log(response);
+          }
+          finally{
+            setIsLoading(false);
+          }
+     };
 
 
 
   return (
-    <Suspense>
     <div className='bg-[#A5D6A7] w-full h-screen overflow-hidden flex flex-row justify-between items-center'>
             <div className='w-[40%] h-[90%]  flex flex-col justify-between items-start relative max-md:hidden'>
                 <div className='flex flex-col justify-around items-center w-[40%] gap-10'>
@@ -69,7 +61,7 @@ const page = () => {
                       <form onSubmit={handleSubmit}   ref={formRef} className='w-full flex flex-col justify-around items-start gap-20'>
                             <div className="relative w-full">
                                 <input
-                                name='name'
+                                 name='name'
                                   type="text"
                                   placeholder=" "
                                   onChange={handleNameChange}
@@ -138,10 +130,6 @@ const page = () => {
                                     <img src='/google.png' alt='icon'/>
                                     <h5 className='text-lg'>Sign Up With Google</h5>
                               </Link>
-                              <Link href={"/"} className='w-[90%] border rounded-lg border-[#E5E5E5] p-4 flex flex-row justify-evenly items-center'>
-                                    <img src='/facebook2.png' alt='icon'/>
-                                    <h5 className='text-lg'>Sign Up With Google</h5>
-                              </Link>
                       </div>
                       <button className='w-full rounded-xl bg-[#E53835] text-white text-2xl p-4 ' onClick={handleButtonClick} >
                                   <h2>{isLoading ? "gg":"Creat Account"}</h2>
@@ -155,7 +143,6 @@ const page = () => {
               </div>
             </div>
     </div>
-    </Suspense>
   )
 }
 

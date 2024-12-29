@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { DialogDemo } from '@/app/candidates/component/DialogDemo';
 const Personal = () => {
   const personalData = [
     { label: 'Name', value: 'John Doe' },
@@ -7,7 +7,12 @@ const Personal = () => {
     { label: 'Phone', value: '+1 123 456 7890' },
     // Add more data as needed
   ];
-
+  const personal=[ 
+      {"address": "strin"},
+      {"email": "string"},
+      {"name": "string"},
+      {"phone": "string"}
+    ]
   const renderData = () => {
     return personalData.map((item, index) => (
       <div key={index} className="flex flex-row justify-between py-2 items-center w-full border-b border-dashed border-[#E6E6E6]">
@@ -32,9 +37,7 @@ const Personal = () => {
         <button className="px-10 py-1 bg-red-600 text-white rounded-xl">
           Upload Cv
         </button>
-        <button className="px-8 py-2 bg-green-600 text-white rounded-xl">
-          Edit
-        </button>
+        <DialogDemo name={"personal"} data={personalData}/>
       </div>
     </div>
   );

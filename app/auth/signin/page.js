@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 import Link from "next/link";
 import { signinAction } from "@/app/action/UserAction";
 const Page = () => {
@@ -7,22 +7,27 @@ const Page = () => {
   const [pass, setpass] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const formRef = useRef(null);
-
-
-
   
+  const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef(null);  
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const handleInputChange = (e) => setHasText(e.target.value !== "");
   const handlepassChange = (e) => setpass(e.target.value !== "");
+
+  const [first, setFirst] = useState(false);
+  useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      const firstTime = params.get('firsttime');
+      setFirst(firstTime || '');
+    }, []); 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const data={email,password}
+    const data={email,password,first}
     try{
       await signinAction(data);
     }
@@ -123,6 +128,13 @@ const Page = () => {
               <hr />
               <Link href={"/auth/signup"} className="text-xl text-[#66BB69]">
                 Create one
+              </Link>
+            </div>
+            <div className="flex flex-row justify-center items-center">
+              <h5 className="text-xl text-gray-500">forget password ?</h5>
+              <hr />
+              <Link href={"/auth/resetpassword"} className="text-xl text-[#66BB69]">
+                reset it
               </Link>
             </div>
           </div>
