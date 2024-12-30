@@ -40,13 +40,23 @@ export async function signinAction(data) {
       cookiesStore.set(key, value, cookieOptions);
       if(!data.first){
         redirect("/candidates/profile");
-      }else{redirect("/setup")}
+      }
+      else{redirect("/setup")}
     });
   }
   try {
-    const data = await res.json();
-    console.log(data);
-    return data;
+    const resdata = await res.json();
+    if(resdata){
+      if(!data.first){
+        if(resdata.Data.role === "candidate"){
+        redirect("/candidates/profile");}else{
+          redirect("/recruters/profile");
+        }
+      }
+      else{redirect("/setup")}
+    }
+    
+    return resdata;
   } catch (error) {
     throw new Error('Failed to parse the response.');
     
