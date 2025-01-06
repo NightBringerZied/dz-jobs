@@ -25,15 +25,16 @@ export function DialogDemo(props) {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-        {props.data.map((item)=>{
-            return(
-            <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor={item.label} className="text-right">
-                {item.label}
-            </Label>
-            <Input id={item.label} className="col-span-3" />
-          </div>)
-        })}
+            {
+            props.data.map((item , index)=>{
+                return(
+                <div className="grid grid-cols-4 items-center gap-4" key={index}>
+                  <Label htmlFor={item.label} className="text-right">
+                      {item.label}
+                  </Label>
+                <Input id={item.label} className="col-span-3" />
+              </div>)
+            })}
         </div>
         <DialogFooter>
           <Button type="submit">Save changes</Button>

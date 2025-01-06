@@ -33,7 +33,7 @@ export async function signinAction(data) {
       };
       console.log('key', key)
       if (key === 'accessToken') {
-        cookieOptions.maxAge = 60 * 15; 
+        cookieOptions.maxAge = 60 * 60 * 60 *15; 
       } else if (key === 'refreshToken') {
         cookieOptions.maxAge = 60 * 60 * 24 * 30; 
       }
@@ -48,10 +48,7 @@ export async function signinAction(data) {
     const resdata = await res.json();
     if(resdata){
       if(!data.first){
-        if(resdata.Data.role === "candidate"){
-        redirect("/candidates/profile");}else{
-          redirect("/recruters/profile");
-        }
+        redirect("/candidates/profile");
       }
       else{redirect("/setup")}
     }

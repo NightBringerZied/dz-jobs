@@ -17,7 +17,7 @@ const buttonVariants = cva(
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        profile:"h-full max-md:w-[20%] md:w-full items-center text-lg justify-center px-2 py-6  text-white rounded-xl bg-[#4D4D]",  
+        profile:"h-full max-md:w-[20%] md:w-full items-center text-lg justify-center px-2 py-6  text-white rounded-xl bg-[#4CAF4F]",  
         personal:"px-8 py-2 bg-green-600 text-white rounded-xl",  
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",

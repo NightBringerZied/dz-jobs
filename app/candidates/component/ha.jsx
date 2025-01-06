@@ -12,7 +12,7 @@ export default function Ha(props) {
     <div className="w-[80%] flex justify-end items-end ">
       <div className="w-full justify-center items-center bg-white">
         <Link
-          href="#"
+          href={props.href}
           onClick={handleClick}
           className={`flex items-center justify-between px-4 py-4 w-full ${
             selected 

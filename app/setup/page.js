@@ -43,9 +43,6 @@ const Page = () => {
       console.log(formData);
       const response = await profileAction(formData);
       console.log("Submission successful:", response);
-    } catch (error) {
-      console.error("Error during submission:", error);
-      alert("Failed to submit. Please try again.");
     } finally {
       setIsLoading(false);
     }

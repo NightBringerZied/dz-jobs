@@ -9,7 +9,7 @@ export async function profileAction(formData) {
     console.log(formData);
     console.log(token);
     const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/candidates/`, {
-    method: "PUT",
+    method: "POST",
     body: formData,
     headers: {
       "Authorization": `Bearer ${token.value}`,
@@ -17,7 +17,7 @@ export async function profileAction(formData) {
     },
   });
   if(res.ok){
-    redirect("/candidates/profile");
+    redirect('/setup/personal');
   }
   let responseData;
   try {
@@ -51,5 +51,31 @@ export async function skipAction() {
   return responseData;
 }
 
-
+export async function candidatePersonalAction(formdata) {
+    const token = await cookies().get("access_token");
+    const data={
+      name: formdata.name,
+      email: formdata.email,
+      address:formdata.address,
+      bio:formdata.bio,
+      phone:formdata.phone,
+      gender:formdata.gender,
+      date_of_birth: formdata.date_of_birth
+    }
+    console.log(data);
+    const res = await fetch(`https://dz-jobs-api-production.up.railway.app/v1/candidates/personal-info`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token.value}`,
+      "Cookie": `${token.name}=${token.value}`
+    },
+  });
+  const  responseData = await res.json(); 
+  if(res.ok){
+    redirect("/candidates/profile");
+  }
+  return responseData;
+}
 
