@@ -55,11 +55,11 @@ const Profile = (props) => {
   return (
     <div className="w-full max-md:flex-col flex flex-row min-h-[250px] bg-white rounded-lg justify-between items-center shadow-2xl">
       <div className="flex max-sm:flex-col flex-row h-full min-h-[180px] items-center justify-center max-md:w-[90%] w-[90%] gap-10">
-        <div className="flex w-[50%] justify-center items-center flex-col">
+        <div className="flex w-[50%] justify-center py-4 items-center flex-col">
           <img
             src={props.candidate.profile_picture}
             alt="Profile"
-            className="object-cover w-[80%] max-w-[400px] h-[80%] max-sm:w-full max-sm:h-[60%]  rounded-2xl"
+            className="object-cover w-[80%] max-w-[200px] max-h-[150px] h-[80%] max-sm:w-full max-sm:h-[60%]  rounded-2xl"
           />
           <div className="my-4  flex flex-row gap-10 justify-center items-center text-xl text-gray-500">
             {resume ? (

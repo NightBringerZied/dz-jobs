@@ -63,7 +63,7 @@ export default function Layout({ children }) {
         </div>
         <h1 className="text-lg font-bold">Dashboard</h1>
       </header>
-      <main className={`flex-1 ${isSidebarOpen ? "pl-[80px]" : "lg:pl-[220px]"} overflow-y-auto overflow-x-hidden bg-[#d7dde2]`}>
+      <main className={`flex-1 ${isSidebarOpen ? "pl-[80px]" : "lg:pl-[220px]"} overflow-y-auto overflow-x-hidden bg-[#f6f7fb]`}>
         {children}
       </main>
     </div>

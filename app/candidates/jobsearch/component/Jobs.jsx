@@ -7,7 +7,7 @@ const Jobs = () => {
             {
                 job_id: 1,
                 title: "Software Engineer",
-                description: "Develop and maintain web applications.",
+                description: "If you are a proactive and solution-driven individual who thrives in a fast-paced, collaborative environment, we encourage you to apply and join us in delivering exceptional support to Google s users worldwide.",
                 location: "Setif,Setif",
                 salary_range: "50000 - 100000 DZD",
                 required_skills: "Java, Spring Boot, React",
@@ -20,7 +20,7 @@ const Jobs = () => {
             {
                 job_id: 2,
                 title: "Software Engineer",
-                description: "Develop and maintain web applications.",
+                description: "If you are a proactive and solution-driven individual who  thrives in a fast-paced, collaborative environment, we encourage you to apply and join us in delivering exceptional support to Google s users worldwide.",
                 location: "Setif,Setif",
                 salary_range: "50000 - 100000 DZD",
                 required_skills: "Java, Spring Boot, React",
@@ -34,7 +34,7 @@ const Jobs = () => {
             {
                 job_id: 3,
                 title: "Sales Representative",
-                description: "Build and maintain customer relationships.",
+                description: "If you are a proactive and solution-driven individual who thrives in a fast-paced, collaborative environment, we encourage you to apply and join us in delivering exceptional support to Google s users worldwide.",
                 location: "Constantine,Constantine",
                 salary_range: "30000 - 60000 DZD",
                 required_skills: "Sales, Communication, Negotiation",
@@ -47,7 +47,7 @@ const Jobs = () => {
             {
                 job_id: 4,
                 title: "Sales Representative",
-                description: "Build and maintain customer relationships.",
+                description: "If you are a proactive and solution-driven individual who thrives in a fast-paced, collaborative environment, we encourage you to apply and join us in delivering exceptional support to Google s users worldwide.",
                 location: "Constantine,Constantine",
                 salary_range: "30000 - 60000 DZD",
                 required_skills: "Sales, Communication, Negotiation",
@@ -60,7 +60,7 @@ const Jobs = () => {
         ]
     }
   return (
-    <div className='flex flex-row flex-wrap  w-full items-start justify-between gap-10 '>
+    <div className='flex flex-row flex-wrap w-full items-start justify-evenly gap-5 '>
         {
             data.jobs.map((item,index)=>{
                 return(
