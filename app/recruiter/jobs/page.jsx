@@ -1,3 +1,4 @@
+import { EditDeleteJob } from "@/components/job-management/edit-delete-job";
 import { Button } from "@/components/ui/button";
 import clsx from "clsx";
 import { DollarSign, Locate, UsersRound } from "lucide-react";
@@ -104,6 +105,7 @@ export default function Page() {
                     </p>
                   </div>
                 </div>
+                <EditDeleteJob data={element} />
               </div>
             ))}
           </div>
