@@ -1,25 +1,28 @@
-"use client"
-import React, { useState, useRef,useEffect } from "react";
+"use client";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { signinAction } from "@/app/action/UserAction";
+import { useRouter } from "next/navigation";
 const Page = () => {
   const [hasText, setHasText] = useState(false);
   const [pass, setpass] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  
+
   const [isLoading, setIsLoading] = useState(false);
-  const formRef = useRef(null);  
+  const formRef = useRef(null);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const handleInputChange = (e) => setHasText(e.target.value !== "");
   const handlepassChange = (e) => setpass(e.target.value !== "");
 
   const [first, setFirst] = useState(false);
   useEffect(() => {
-      const params = new URLSearchParams(window.location.search);
-      const firstTime = params.get('firsttime');
-      setFirst(firstTime || '');
-    }, []); 
+    const params = new URLSearchParams(window.location.search);
+    const firstTime = params.get("firsttime");
+    setFirst(firstTime || "");
+  }, []);
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,19 +30,24 @@ const Page = () => {
     setError("");
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const data={email,password,first}
-    try{
-      await signinAction(data);
-    }
-    finally{
+    const data = { email, password, first };
+    try {
+      const res = await signinAction(data);
+      if (res?.role === "recruiter") {
+        router.push("/recruiter/profile");
+      } else if (res?.role === "candidate") {
+        router.push("/candidates/profile");
+      }
+    } finally {
       setIsLoading(false);
     }
   };
-  
 
   const handleButtonClick = () => {
     if (formRef.current) {
-      formRef.current.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+      formRef.current.dispatchEvent(
+        new Event("submit", { bubbles: true, cancelable: true })
+      );
     }
   };
 
@@ -60,7 +68,11 @@ const Page = () => {
         <div className="flex flex-col justify-evenly items-start w-[60%] h-[40%] gap-20">
           <h1 className="text-6xl text-black font-bold">Sign In</h1>
           <div className="flex flex-col justify-evenly items-start w-full gap-5">
-            <form ref={formRef} onSubmit={handleSubmit} className="w-full flex flex-col justify-around items-start gap-20">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="w-full flex flex-col justify-around items-start gap-20"
+            >
               <div className="relative w-full">
                 <input
                   type="text"
@@ -71,7 +83,11 @@ const Page = () => {
                 />
                 <div
                   className={`absolute left-3 flex items-center space-x-2 transition-all duration-300 
-                    ${hasText ? "top-0 -translate-y-full text-sm text-black" : "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"} 
+                    ${
+                      hasText
+                        ? "top-0 -translate-y-full text-sm text-black"
+                        : "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"
+                    } 
                     peer-focus:top-[-10%] peer-focus:-translate-y-full peer-focus:text-lg peer-focus:text-black`}
                 >
                   <img src="/mail.png" alt="icon" />
@@ -88,7 +104,11 @@ const Page = () => {
                 />
                 <div
                   className={`absolute left-3 flex items-center space-x-2 transition-all duration-300 
-                    ${pass ? "top-0 -translate-y-full text-sm text-black" : "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"} 
+                    ${
+                      pass
+                        ? "top-0 -translate-y-full text-sm text-black"
+                        : "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500"
+                    } 
                     peer-focus:top-[-10%] peer-focus:-translate-y-full peer-focus:text-lg peer-focus:text-black`}
                 >
                   <img src="/key.png" alt="icon" />
@@ -99,7 +119,10 @@ const Page = () => {
                   onClick={togglePasswordVisibility}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                 >
-                  <img src={showPassword ? "/hide.png" : "/show.png"} alt="icon" />
+                  <img
+                    src={showPassword ? "/hide.png" : "/show.png"}
+                    alt="icon"
+                  />
                 </button>
               </div>
             </form>
@@ -133,7 +156,10 @@ const Page = () => {
             <div className="flex flex-row justify-center items-center">
               <h5 className="text-xl text-gray-500">forget password ?</h5>
               <hr />
-              <Link href={"/auth/resetpassword"} className="text-xl text-[#66BB69]">
+              <Link
+                href={"/auth/resetpassword"}
+                className="text-xl text-[#66BB69]"
+              >
                 reset it
               </Link>
             </div>
