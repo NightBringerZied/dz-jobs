@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { useState,useRef,useEffect,Suspense } from 'react'
+import { useState,useRef,useEffect} from 'react'
 import { signupAction } from '@/app/action/UserAction';
 import Link from 'next/link'
 const page = () => {
@@ -10,18 +10,21 @@ const page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef(null);
-  const [role, setRole] = useState('');
+  
   const togglePasswordVisibility = () => {setShowPassword((prev) => !prev);};
   const handleInputChange = (e) => {setHasText(e.target.value !== "");};
   const handleNameChange = (e) => {setname(e.target.value !== ""); };
   const handlepassChange = (e) => {setpass(e.target.value !== "");};
   const handleButtonClick = () => {if (formRef.current) {formRef.current.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));} };
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const roleFromUrl = params.get('role');
-    setRole(roleFromUrl || '');
-  }, []); 
-    
+   
+  const [role, setRole] = useState('');
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const firstTime = params.get('role');
+        console.log(firstTime);
+        setRole(firstTime);
+      }, []); 
+    console.log(role);
   const  handleSubmit = async (e) => {
       console.log("i enter but idk")
       e.preventDefault();
@@ -29,7 +32,6 @@ const page = () => {
       const email = e.target.email.value;
       const password = e.target.password.value;
       const name = e.target.name.value;
-      const role="candidate"
       const data={email,password,name,role}
           try{
             const response = await signupAction(data);
